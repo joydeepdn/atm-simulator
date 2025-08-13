@@ -1,4 +1,6 @@
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -11,31 +13,31 @@ class ExistingUser extends MainScreen {
         int testCardNumber;
         int testPIN;
 
-        ArrayList<Integer> newarr;
+        HashMap<Integer,Integer> testInfo;
 
         /*
         * This retrieves the user account-Information from the Customer Class to validate user
         * */
 
-        newarr = c.getAccountInfo();
+      /*  testInfo = c.getAccountInfo();*/
 
+        testInfo = c.getCusInfo();
 
         System.out.println("Enter account details:\n");
         System.out.println("Enter your Card Number:");
         testCardNumber = scan.nextInt();
 
         /*
-         * This will check the user entered Card Number and
-         * PIN, if Card Number and PIN is valid user is granted Access
-         * */
+        * Old code used ArrayList to validate user Authentication
+        * */
 
 
-        for (int i = 0; i < newarr.size(); i = i + 2) {
-            if (newarr.get(i) == testCardNumber) {
+       /* for (int i = 0; i < testInfo.size(); i = i + 2) {
+            if (testInfo.get(i) == testCardNumber) {
                 System.out.println("Enter your 4 digit PIN:\n");
                 testPIN = scan.nextInt();
-                for (int j = i + 1; j < newarr.size(); j = j + 2) {
-                    if (newarr.get(j) == testPIN) {
+                for (int j = i + 1; j < testInfo.size(); j = j + 2) {
+                    if (testInfo.get(j) == testPIN) {
                         scan.nextLine();
                         existingUserMenu(scan);
                     } else {
@@ -45,7 +47,30 @@ class ExistingUser extends MainScreen {
             } else {
                 System.out.println("**************** Card Number not found in database! *****************");
             }
+        }*/
+
+
+        /*
+          This will check the user entered Card Number and
+          PIN, if Card Number and PIN is valid user is granted Access
+         */
+
+        for (int _ : testInfo.keySet()){
+            if(testInfo.containsKey(testCardNumber)){
+                System.out.println("Enter your 4 digit PIN:");
+                testPIN = scan.nextInt();
+                if(testInfo.containsValue(testPIN)){
+                    existingUserMenu(scan);
+                }
+                else {
+                    System.out.println("Incorrect PIN!");
+                }
+            }
+            else {
+                System.out.println("Card No. not found in database!");
+            }
         }
+        scan.nextLine();
     }
 
     public void existingUserMenu(Scanner scan) {
@@ -56,21 +81,11 @@ class ExistingUser extends MainScreen {
 
         while (!userInput.equals("5")) {
             switch (userInput) {
-                case "1" -> {
-                    Bal = depositAmt(scan);
-                }
-                case "2" -> {
-                    Bal = withdrawAmt(scan);
-                }
-                case "3" -> {
-                    System.out.println("Your Balance is:" + Bal);
-                }
-                case "4" -> {
-                    Bal = quickWithdraw(scan);
-                }
-                default -> {
-                    System.out.println("******************** Invalid Choice! ************************");
-                }
+                case "1" -> Bal = depositAmt(scan);
+                case "2" -> Bal = withdrawAmt(scan);
+                case "3" -> System.out.println("Your Balance is:" + Bal);
+                case "4" -> quickWithdraw(scan);
+                default -> System.out.println("******************** Invalid Choice! ************************");
             }
             System.out.println("Enter your choice:");
             System.out.println("1->Deposit\n2->Withdraw\n3->Balance-Checking\n4->Quick Withdraw\n5->Back to Main Menu\n");
@@ -86,6 +101,7 @@ class ExistingUser extends MainScreen {
             System.out.println("********************* Invalid Amount! *****************************");
         } else {
             Bal += deposit;
+            System.out.println("Amount Successfully Deposited!");
         }
         scan.nextLine();
         return Bal;
@@ -98,49 +114,55 @@ class ExistingUser extends MainScreen {
             System.out.println("********************** Not Enough Balance! *************************");
         } else {
             Bal -= wit;
+            System.out.println("Amount Successfully Withdrawn!");
         }
         scan.nextLine();
         return Bal;
     }
 
-    public int quickWithdraw(Scanner scan) {
+    public void quickWithdraw(Scanner scan) {
 
         int amt = 0;
 
+        HashMap<String,Integer> amountInfo = new HashMap<>();
+
+        amountInfo.put("1",500);
+        amountInfo.put("2",1000);
+        amountInfo.put("3",1500);
+        amountInfo.put("4",2000);
+
         System.out.println("Select amount to be withdrawn:");
         System.out.println("1->500\n2->1000\n3->1500\n4->2000\n5->Back");
+
         userInput = scan.nextLine();
 
-        switch (userInput) {
-            case "1" -> amt = 500;
-            case "2" -> amt = 1000;
-            case "3" -> amt = 1500;
-            case "4" -> amt = 2000;
-            default -> System.out.println("Invalid Input!");
+        /*
+        * This will check if the entered userInput is a key in the amountMap
+        * */
+
+        if(!amountInfo.containsKey(userInput)){
+            System.out.println("Invalid choice!");
+            return;
+        }
+        else {
+            for (String _ : amountInfo.keySet()) {
+                if (amountInfo.containsKey(userInput)) {
+                    amt = amountInfo.get(userInput);
+                }
+            }
         }
 
         if (amt > Bal) {
             System.out.println("Not Enough Balance!");
+
         } else {
             switch (userInput) {
-                case "1" -> {
-                    Bal -= 500;
-                    System.out.println("Amount successfully Withdrawn!");
-                }
-                case "2" -> {
-                    Bal -= 1000;
-                    System.out.println("Amount successfully Withdrawn!");
-                }
-                case "3" -> {
-                    Bal -= 1500;
-                    System.out.println("Amount successfully Withdrawn!");
-                }
-                case "4" -> {
-                    Bal -= 2000;
-                    System.out.println("Amount successfully Withdrawn!");
-                }
+                case "1" -> Bal -= 500;
+                case "2" -> Bal -= 1000;
+                case "3" -> Bal -= 1500;
+                case "4" -> Bal -= 2000;
             }
+            System.out.println("Amount Successfully withdrawn!");
         }
-        return Bal;
     }
 }

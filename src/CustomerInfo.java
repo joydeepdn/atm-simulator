@@ -1,13 +1,16 @@
-import java.util.ArrayList;
+
+import java.util.HashMap;
 
 class CustomerInfo{
-    ArrayList<Integer> customerInfo = new ArrayList<>();
+
+    HashMap<Integer,Integer> customerInfo = new HashMap<>();
+
 
     public void setAccountInfo(int cardNumber, int PIN){
-        customerInfo.add(cardNumber);
-        customerInfo.add(PIN);
+        customerInfo.put(cardNumber,PIN);
     }
-    public ArrayList<Integer> getAccountInfo(){
+
+    public HashMap<Integer,Integer> getCusInfo(){
         return customerInfo;
     }
 }
