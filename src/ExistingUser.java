@@ -1,20 +1,17 @@
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 class ExistingUser extends MainScreen {
+
     private int Bal = 0;
-
-
-    public void existingUser(Scanner scan, CustomerInfo c) throws InputMismatchException {
+    public void existingUser(Scanner scan, Customer c) throws InputMismatchException {
 
         int testCardNumber;
         int testPIN;
 
         HashMap<Integer,Integer> testInfo;
-
         /*
         * This retrieves the user account-Information from the Customer Class to validate user
         * */
@@ -27,30 +24,7 @@ class ExistingUser extends MainScreen {
         System.out.println("Enter your Card Number:");
         testCardNumber = scan.nextInt();
 
-        /*
-        * Old code used ArrayList to validate user Authentication
-        * */
-
-
-       /* for (int i = 0; i < testInfo.size(); i = i + 2) {
-            if (testInfo.get(i) == testCardNumber) {
-                System.out.println("Enter your 4 digit PIN:\n");
-                testPIN = scan.nextInt();
-                for (int j = i + 1; j < testInfo.size(); j = j + 2) {
-                    if (testInfo.get(j) == testPIN) {
-                        scan.nextLine();
-                        existingUserMenu(scan);
-                    } else {
-                        System.out.println("**************** Incorrect PIN! *******************");
-                    }
-                }
-            } else {
-                System.out.println("**************** Card Number not found in database! *****************");
-            }
-        }*/
-
-
-        /*
+       /*
           This will check the user entered Card Number and
           PIN, if Card Number and PIN is valid user is granted Access
          */
@@ -60,6 +34,7 @@ class ExistingUser extends MainScreen {
                 System.out.println("Enter your 4 digit PIN:");
                 testPIN = scan.nextInt();
                 if(testInfo.containsValue(testPIN)){
+                    scan.nextLine();
                     existingUserMenu(scan);
                 }
                 else {
@@ -68,9 +43,9 @@ class ExistingUser extends MainScreen {
             }
             else {
                 System.out.println("Card No. not found in database!");
+                scan.nextLine();
             }
         }
-        scan.nextLine();
     }
 
     public void existingUserMenu(Scanner scan) {

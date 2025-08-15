@@ -9,7 +9,7 @@ public class Main {
         MainMenu m = new MainMenu();
         NewUser n = new NewUser();
         ExistingUser ex = new ExistingUser();
-        CustomerInfo c = new CustomerInfo();
-        m.mainMenu(scan,n,ex,m,c);
+        Customer c = new Customer();
+        m.mainMenu(scan,n,ex,c);
     }
 }

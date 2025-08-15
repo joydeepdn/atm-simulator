@@ -3,7 +3,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 class NewUser extends MainScreen{
-    public void newUserAccountCreation(Scanner scan, CustomerInfo c) throws InputMismatchException{
+    public void newUserAccountCreation(Scanner scan, Customer c) throws InputMismatchException{
 
         int cardNumber;
         int PIN;
