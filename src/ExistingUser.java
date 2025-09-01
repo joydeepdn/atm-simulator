@@ -21,7 +21,7 @@ class ExistingUser extends MainScreen {
         testInfo = c.getCusInfo();
 
         System.out.println("Enter account details:\n");
-        System.out.println("Enter your Card Number:");
+        System.out.print("Enter your Card Number:");
         testCardNumber = scan.nextInt();
 
        /*
@@ -31,7 +31,7 @@ class ExistingUser extends MainScreen {
 
         for (int _ : testInfo.keySet()){
             if(testInfo.containsKey(testCardNumber)){
-                System.out.println("Enter your 4 digit PIN:");
+                System.out.print("Enter your 4 digit PIN:");
                 testPIN = scan.nextInt();
                 if(testInfo.containsValue(testPIN)){
                     scan.nextLine();
@@ -49,9 +49,9 @@ class ExistingUser extends MainScreen {
     }
 
     public void existingUserMenu(Scanner scan) {
-        System.out.println("Enter your choice:");
 
         System.out.println("1->Deposit\n2->Withdraw\n3->Check Balance\n4->Quick Withdraw\n5->Back to Main Menu\n");
+        System.out.print("Enter Choice:");
         userInput = scan.nextLine();
 
         while (!userInput.equals("5")) {
@@ -62,14 +62,14 @@ class ExistingUser extends MainScreen {
                 case "4" -> quickWithdraw(scan);
                 default -> System.out.println("******************** Invalid Choice! ************************");
             }
-            System.out.println("Enter your choice:");
             System.out.println("1->Deposit\n2->Withdraw\n3->Balance-Checking\n4->Quick Withdraw\n5->Back to Main Menu\n");
+            System.out.print("Enter Choice:");
             userInput = scan.nextLine();
         }
     }
 
     public int depositAmt(Scanner scan) {
-        System.out.println("Enter Amount to be deposited:");
+        System.out.print("Enter Amount to be deposited:");
         int deposit = scan.nextInt();
 
         if (deposit < 0) {
@@ -83,7 +83,7 @@ class ExistingUser extends MainScreen {
     }
 
     public int withdrawAmt(Scanner scan) {
-        System.out.println("Enter amount to be withdrawn:");
+        System.out.print("Enter amount to be withdrawn:");
         int wit = scan.nextInt();
         if (wit > Bal) {
             System.out.println("********************** Not Enough Balance! *************************");

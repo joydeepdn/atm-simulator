@@ -23,7 +23,7 @@ class NewUser extends MainScreen{
 
         while (test.length() != 4) {
 
-            System.out.println("Enter your 4 digit PIN:\n");
+            System.out.print("Enter your 4 digit PIN:");
             PIN = scan.nextInt();
             test = String.valueOf(PIN);
 
