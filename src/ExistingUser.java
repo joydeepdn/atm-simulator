@@ -20,7 +20,7 @@ class ExistingUser extends MainScreen {
 
         testInfo = c.getCusInfo();
 
-        System.out.println("Enter account details:\n");
+        System.out.println("Enter account details");
         System.out.print("Enter your Card Number:");
         testCardNumber = scan.nextInt();
 
@@ -50,7 +50,7 @@ class ExistingUser extends MainScreen {
 
     public void existingUserMenu(Scanner scan) {
 
-        System.out.println("1->Deposit\n2->Withdraw\n3->Check Balance\n4->Quick Withdraw\n5->Back to Main Menu\n");
+        System.out.println("1->Deposit\n2->Withdraw\n3->Check Balance\n4->Quick Withdraw\n5->Back to Main Menu");
         System.out.print("Enter Choice:");
         userInput = scan.nextLine();
 
@@ -60,9 +60,9 @@ class ExistingUser extends MainScreen {
                 case "2" -> Bal = withdrawAmt(scan);
                 case "3" -> System.out.println("Your Balance is:" + Bal);
                 case "4" -> quickWithdraw(scan);
-                default -> System.out.println("******************** Invalid Choice! ************************");
+                default -> System.out.println("Invalid Choice!");
             }
-            System.out.println("1->Deposit\n2->Withdraw\n3->Balance-Checking\n4->Quick Withdraw\n5->Back to Main Menu\n");
+            System.out.println("1->Deposit\n2->Withdraw\n3->Balance-Checking\n4->Quick Withdraw\n5->Back to Main Menu");
             System.out.print("Enter Choice:");
             userInput = scan.nextLine();
         }
@@ -73,7 +73,7 @@ class ExistingUser extends MainScreen {
         int deposit = scan.nextInt();
 
         if (deposit < 0) {
-            System.out.println("********************* Invalid Amount! *****************************");
+            System.out.println("Invalid Amount!");
         } else {
             Bal += deposit;
             System.out.println("Amount Successfully Deposited!");
@@ -86,7 +86,7 @@ class ExistingUser extends MainScreen {
         System.out.print("Enter amount to be withdrawn:");
         int wit = scan.nextInt();
         if (wit > Bal) {
-            System.out.println("********************** Not Enough Balance! *************************");
+            System.out.println("Not Enough Balance!");
         } else {
             Bal -= wit;
             System.out.println("Amount Successfully Withdrawn!");

@@ -15,7 +15,8 @@ class NewUser extends MainScreen{
 
         cardNumber = (int) (Math.random() * 1000001);
 
-        System.out.println(cardNumber +" is your Card Number Please Note it down!\n");
+        System.out.printf("'%d'",cardNumber);
+        System.out.println(" "+"is your card number please note it down!");
 
         /*
          * This will check that the entered PIN is 4 digit and successfully creates an account
@@ -28,12 +29,12 @@ class NewUser extends MainScreen{
             test = String.valueOf(PIN);
 
             if (test.length() == 4) {
-                System.out.println("\nAccount Successfully Created!\n");
+                System.out.println("Account created successfully");
                 c.setAccountInfo(cardNumber,PIN);
                 scan.nextLine();
 
             } else {
-                System.out.println("PIN must be 4 digit!\n");
+                System.out.println("PIN must be 4 digit!");
             }
         }
     }

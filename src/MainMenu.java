@@ -4,7 +4,7 @@ class MainMenu extends MainScreen{
     public void mainMenu(Scanner scan, NewUser n, ExistingUser ex, Customer c) {
 
 
-        System.out.println("1->New-user\n2->Existing-user\n3->Exit\n");
+        System.out.println("1->New-user\n2->Existing-user\n3->Exit");
         System.out.print("Enter choice:");
         try {
             userInput = scan.nextLine();
@@ -20,17 +20,17 @@ class MainMenu extends MainScreen{
                         break;
                     }
                     default: {
-                        System.out.println("************** Invalid choice...! ******************\n");
+                        System.out.println("Invalid Choice!");
                     }
                 }
-                System.out.println("1->New-user\n2->Existing-user\n3->Exit\n");
+                System.out.println("1->New-user\n2->Existing-user\n3->Exit");
                 System.out.print("Enter Choice:");
                 userInput = scan.nextLine();
             }
         } catch (Exception e) {
-            System.out.println("*********** Input Mismatch Please ensure you enter proper Input **************\n");
+            System.out.println("Input Mismatch, please ensure you enter proper inputs");
         } finally {
-            System.out.println("\nThank for using DEBNATH Bank\n");
+            System.out.println("Thank for using DEBNATH Bank");
         }
     }
 }
