@@ -1,7 +1,6 @@
 
 import java.util.HashMap;
-
-class Customer{
+ class Customer{
 
     HashMap<Integer,Integer> customerInfo = new HashMap<>();
 
