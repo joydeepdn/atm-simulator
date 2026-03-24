@@ -21,7 +21,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="CurrentFile" />
+    <option name="selectedTabId" value="DEPENDENCY_CHECKER_PROBLEMS_TAB" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 0
@@ -37,7 +37,7 @@
     "Application.Main.executor": "Run",
     "Application.MainClass.executor": "Run",
     "Downloaded.Files.Path.Enabled": "false",
-    "JAR Application.atm-simulation-1.0-SNAPSHOT.jar.executor": "Run",
+    "JAR Application.atm-simulation-1.0-SNAPSHOT.jar.executor": "Debug",
     "Maven.atm-simulation [install].executor": "Run",
     "Maven.atm-simulation [package].executor": "Run",
     "Repository.Attach.Annotations": "false",
@@ -47,11 +47,11 @@
     "RunOnceActivity.git.unshallow": "true",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/JOYDEEP/IdeaProjects/atm-simulation",
+    "last_opened_file_path": "C:/Users/JOYDEEP/OneDrive/Documents/projects/Java/JDBC/MySQL/mysql-connector-j-9.6.0/mysql-connector-j-9.6.0.jar",
     "onboarding.tips.debug.path": "C:/Users/JOYDEEP/IdeaProjects/atm-simulation/src/Main.java",
-    "project.structure.last.edited": "Modules",
+    "project.structure.last.edited": "Libraries",
     "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
+    "project.structure.side.proportion": "0.2",
     "settings.editor.selected.configurable": "reference.settingsdialog.IDE.editor.colors.General"
   }
 }]]></component>

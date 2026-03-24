@@ -2,17 +2,16 @@
 import java.util.HashMap;
 import java.util.InputMismatchException;
 import java.util.Scanner;
-import java.sql.*;
 
 class ExistingUser extends MainScreen {
 
     private int Bal = 0;
     public void existingUser(Scanner scan, Customer c) throws InputMismatchException {
 
-        int testCardNumber;
-        int testPIN;
+        String testCardNumber;
+        String testPIN;
 
-        HashMap<Integer,Integer> testInfo;
+        HashMap<String,String> testInfo;
         /*
         * This retrieves the user account-Information from the Customer Class to validate user
         * */
@@ -23,17 +22,18 @@ class ExistingUser extends MainScreen {
 
         System.out.println("Enter account details");
         System.out.print("Enter your Card Number:");
-        testCardNumber = scan.nextInt();
+        testCardNumber = scan.nextLine();
 
        /*
           This will check the user entered Card Number and
           PIN, if Card Number and PIN is valid user is granted Access
          */
 
-        for (int _ : testInfo.keySet()){
             if(testInfo.containsKey(testCardNumber)){
                 System.out.print("Enter your 4 digit PIN:");
-                testPIN = scan.nextInt();
+
+                testPIN = scan.nextLine();
+
                 if(testInfo.containsValue(testPIN)){
                     scan.nextLine();
                     existingUserMenu(scan);
@@ -46,7 +46,6 @@ class ExistingUser extends MainScreen {
                 System.out.println("Card No. not found in database!");
                 scan.nextLine();
             }
-        }
     }
 
     public void existingUserMenu(Scanner scan) {
