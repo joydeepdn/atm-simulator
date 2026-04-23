@@ -1,36 +1,34 @@
 
 import java.util.Scanner;
-class MainMenu extends MainScreen{
-    public void mainMenu(Scanner scan, NewUser n, ExistingUser ex, Customer c) {
 
+class MainMenu extends MainScreen {
+    public void mainMenu(Scanner scan, NewUser n, ExistingUser e, Customer c) {
 
-        System.out.println("1->New-user\n2->Existing-user\n3->Exit");
-        System.out.print("Enter choice:");
+        do {
+            System.out.println("+----------------------------------+");
+            System.out.println("|  1.New-user                      |\n|  2.Existing-user                 |\n|  3.Exit                          |");
+            System.out.println("+----------------------------------+");
 
+            System.out.print("Enter choice:");
+            userInput = scan.nextLine();
 
-            String userInput = scan.nextLine();
-            while (!userInput.equals("3")) {
-
-                switch (userInput) {
-                    case "1": {
-                        n.newUserAccountCreation();
-                        break;
-                    }
-                    case "2": {
-                        ex.existingUser(scan, c);
-                        break;
-                    }
-                    case "3": {
-                        System.out.println("Thankyou");
-                        break;
-                    }
-                    default : {
-                        System.out.println("Invalid choice!");
-                    }
+            switch (userInput) {
+                case "1": {
+                    n.newUserAccountCreation();
+                    break;
                 }
-                System.out.println("1->New-user\n2->Existing-user\n3->Exit");
-                System.out.print("Enter Choice:");
-                userInput = scan.nextLine();
+                case "2": {
+                    e.existingUser(c);
+                    break;
+                }
+                case "3": {
+                    System.out.println("Thank You");
+                    break;
+                }
+                default: {
+                    System.out.println("Invalid choice!");
+                }
             }
-        }
+        } while (!userInput.equals("3"));
     }
+}

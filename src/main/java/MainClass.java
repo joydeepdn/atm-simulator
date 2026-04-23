@@ -7,8 +7,8 @@ public class MainClass {
         Scanner scan = new Scanner(System.in);
         MainMenu m = new MainMenu();
         NewUser n = new NewUser();
-        ExistingUser ex = new ExistingUser();
+        ExistingUser e = new ExistingUser();
         Customer c = new Customer();
-        m.mainMenu(scan,n,ex,c);
+        m.mainMenu(scan,n,e,c);
     }
 }

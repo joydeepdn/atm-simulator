@@ -25,12 +25,8 @@ class NewUser extends MainScreen{
         pin = pin();
 
         custData();
-
     }
-
-        /*
-         * This will check that the entered PIN is 4 digit and successfully creates an account
-         * */
+    
     String pin(){
 
         String pin_no = null;

@@ -1,6 +1,6 @@
 abstract class MainScreen{
-
-    String userInput;
+    
+    String userInput = null;
 
      protected void newUserAccountCreation(){}
 

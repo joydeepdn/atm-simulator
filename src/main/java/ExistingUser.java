@@ -6,7 +6,9 @@ import java.util.Scanner;
 class ExistingUser extends MainScreen {
 
     private int Bal = 0;
-    public void existingUser(Scanner scan, Customer c) throws InputMismatchException {
+    Scanner scan = new Scanner(System.in);
+
+    public void existingUser(Customer c) throws InputMismatchException {
 
         String testCardNumber;
         String testPIN;
