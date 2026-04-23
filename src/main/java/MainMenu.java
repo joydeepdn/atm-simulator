@@ -13,7 +13,7 @@ class MainMenu extends MainScreen{
 
                 switch (userInput) {
                     case "1": {
-                        n.newUserAccountCreation(scan,c);
+                        n.newUserAccountCreation();
                         break;
                     }
                     case "2": {
