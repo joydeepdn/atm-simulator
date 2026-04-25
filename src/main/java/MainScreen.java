@@ -1,10 +1,12 @@
+import java.util.Scanner;
+
 abstract class MainScreen{
-    
-    String userInput = null;
 
-     protected void newUserAccountCreation(){}
+    protected String userInput = null;
 
-     protected void existingUser(){}
+    Scanner scan = new Scanner(System.in);
+    NewUser newUser = new NewUser();
+    ExistingUser existinguser = new ExistingUser();
 
-     protected void mainMenu(){}
 }
+
