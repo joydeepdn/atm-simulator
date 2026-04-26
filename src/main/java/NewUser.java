@@ -3,18 +3,22 @@ import java.sql.*;
 import java.util.Scanner;
 import java.util.regex.*;
 
-class NewUser extends MainScreen{
+class NewUser{
 
-    private String url = "jdbc:mysql://localhost:3306/learning_jdbc";
-    private String username = "root";
-    private String password = "joydeep05102003";  
     private String name;
     private String cardNumber;
-    private String pin; 
-    Scanner scan = new Scanner(System.in);
+    private String pin;
 
+    Scanner scan;
 
-    public void newUserAccountCreation(){
+    NewUser(Scanner scan){
+        this.scan =  scan;
+    }
+
+    DatabaseManager db = new DatabaseManager();
+    Connection con = db.getConnection();
+
+    public void newuserCreation(){
 
         System.out.println("Enter Name:");
         name = scan.nextLine();
@@ -54,11 +58,7 @@ class NewUser extends MainScreen{
 
     }
     void custData(){
-        try(Connection con = DriverManager.getConnection(url, username, password)){
-
-            System.out.println("success....");
-
-
+        try{
             String sql = "INSERT INTO customers (full_name, balance, card_number, pin) VALUES (?,?,?,?)";
 
             PreparedStatement pstmt = con.prepareStatement(sql);
@@ -72,7 +72,7 @@ class NewUser extends MainScreen{
             System.out.println(rowsInserted + "no. of rows affected successfully");
 
         }catch(SQLException e){
-            System.out.println("error conncecting database...."+ e.getErrorCode()+ e.getMessage());
+            System.out.println("error..." + e.getMessage());
         }
     }
 }

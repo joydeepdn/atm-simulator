@@ -7,6 +7,7 @@ import java.util.HashMap;
 
     public void setAccountInfo(String cardNumber, String pin){
         customerInfo.put(cardNumber,pin);
+
     }
 
     public HashMap<String,String> getCusInfo(){

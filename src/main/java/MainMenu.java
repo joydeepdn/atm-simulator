@@ -1,9 +1,14 @@
-
 import java.util.Scanner;
 
-class MainMenu extends MainScreen {
-    public void mainMenu(Scanner scan, NewUser n, ExistingUser e, Customer c) {
+class MainMenu{
 
+    String userInput;
+
+    Scanner scan = new Scanner(System.in);
+    NewUser newuser = new NewUser(scan);
+    ExistingUser existinguser = new ExistingUser(scan);
+
+            public void mainMenu() {
         do {
             System.out.println("+----------------------------------+");
             System.out.println("|  1.New-user                      |\n|  2.Existing-user                 |\n|  3.Exit                          |");
@@ -14,15 +19,16 @@ class MainMenu extends MainScreen {
 
             switch (userInput) {
                 case "1": {
-                    n.newUserAccountCreation();
+                    newuser.newuserCreation();
                     break;
                 }
                 case "2": {
-                    e.existingUser(c);
+                    existinguser.existingUser();
                     break;
                 }
                 case "3": {
                     System.out.println("Thank You");
+                    scan.close();
                     break;
                 }
                 default: {
