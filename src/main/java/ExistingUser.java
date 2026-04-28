@@ -7,12 +7,11 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 class ExistingUser{
-
-    // private int Bal = 0;
-    // Scanner scan = new Scanner(System.in);
+    String userInput;
     Scanner scan;
     DatabaseManager db = new DatabaseManager();
     Connection con = db.getConnection();
+    ResultSet rs;
     
     ExistingUser(Scanner scan){
         this.scan = scan;
@@ -22,61 +21,32 @@ class ExistingUser{
 
         String test_cardnumber;
         String test_pin;
-
-        // HashMap<String,String> testInfo;
-        /*
-        * This retrieves the user account-Information from the Customer Class to validate user
-        * */
-
-      /*  testInfo = c.getAccountInfo();*/
-
-        // testInfo = c.getCusInfo();
+        String name;
 
         System.out.println("Enter account details");
         System.out.print("Enter your Card Number:");
         test_cardnumber = scan.nextLine();
 
-       /*
-          This will check the user entered Card Number and
-          PIN, if Card Number and PIN is valid user is granted Access
-         */
 
-    //         if(testInfo.containsKey(testCardNumber)){
-    //             System.out.print("Enter your 4 digit PIN:");
-
-    //             testPIN = scan.nextLine();
-
-    //             if(testInfo.containsValue(testPIN)){
-    //                 scan.nextLine();
-    //                 existingUserMenu(scan);
-    //             }
-    //             else {
-    //                 System.out.println("Incorrect PIN!");
-    //             }
-    //         }
-    //         else {
-    //             System.out.println("Card No. not found in database!");
-    //             scan.nextLine();
-    //         }
-    // }
+        System.out.println("Enter Pin No.");
         test_pin = scan.nextLine();
 
 
         try{
             // int rowFound;
 
-            String sql = "SELECT card_number, pin FROM customers WHERE card_number = ? AND pin = ?";
+            String sql = "SELECT name, card_number, pin FROM customers WHERE card_number = ? AND pin = ?";
 
             PreparedStatement pstmt = con.prepareStatement(sql);
 
             pstmt.setString(1, test_cardnumber);
             pstmt.setString(2, test_pin);
 
-            ResultSet rs = pstmt.executeQuery();
+            rs = pstmt.executeQuery();
 
             if(rs.next()){
                 System.out.println("User exists!");
-                // existingUserMenu();
+                existingUserMenu();
             }
             else{
                 System.out.println("User do not exist");
@@ -86,27 +56,24 @@ class ExistingUser{
             System.out.println("Error");
         }
     }
+
+
+    public void existingUserMenu() {
+        try{
+        System.out.println("Welcome" + rs.getString("name"));
+        }catch(SQLException e){
+            System.out.println("Error..."+e.getMessage());
+        }
+        System.out.println("+--------------------------------------------------------------------------------+");
+        System.out.println("|  1.Deposit\n|  2.Withdraw\n|  3.Check Balance\n|  4.Quick Withdraw|  5.Back to Main Menu");
+        System.out.println("+--------------------------------------------------------------------------------+");
+        System.out.print("Enter Choice:");
+        userInput = scan.nextLine();    
+   
+    }
 }
 
-//     public void existingUserMenu() {
-
-//         System.out.println("1->Deposit\n2->Withdraw\n3->Check Balance\n4->Quick Withdraw\n5->Back to Main Menu");
-//         System.out.print("Enter Choice:");
-//         userInput = scan.nextLine();
-
-//         while (!userInput.equals("5")) {
-//             switch (userInput) {
-//                 case "1" -> Bal = depositAmt(scan);
-//                 case "2" -> Bal = withdrawAmt(scan);
-//                 case "3" -> System.out.println("Your Balance is:" + Bal);
-//                 case "4" -> quickWithdraw(scan);
-//                 default -> System.out.println("Invalid Choice!");
-//             }
-//             System.out.println("1->Deposit\n2->Withdraw\n3->Balance-Checking\n4->Quick Withdraw\n5->Back to Main Menu");
-//             System.out.print("Enter Choice:");
-//             userInput = scan.nextLine();
-//         }
-//     }
+    
 
 //     public int depositAmt(Scanner scan) {
 //         System.out.print("Enter Amount to be deposited:");
