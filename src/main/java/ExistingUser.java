@@ -5,12 +5,20 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 class ExistingUser{
+
+    private String Bal;
+    String sql;
     String userInput;
     Scanner scan;
+    Pattern pt = Pattern.compile("[0-9]{0,5}");
+    Matcher mt;
     DatabaseManager db = new DatabaseManager();
     Connection con = db.getConnection();
+    PreparedStatement pstmt;
     ResultSet rs;
     
     ExistingUser(Scanner scan){
@@ -21,23 +29,22 @@ class ExistingUser{
 
         String test_cardnumber;
         String test_pin;
-        String name;
 
         System.out.println("Enter account details");
         System.out.print("Enter your Card Number:");
         test_cardnumber = scan.nextLine();
 
 
-        System.out.println("Enter Pin No.");
+        System.out.print("Enter Pin No:");
         test_pin = scan.nextLine();
 
 
         try{
             // int rowFound;
 
-            String sql = "SELECT name, card_number, pin FROM customers WHERE card_number = ? AND pin = ?";
+            sql = "SELECT full_name, balance card_number, pin FROM customers WHERE card_number = ? AND pin = ?";
 
-            PreparedStatement pstmt = con.prepareStatement(sql);
+            pstmt = con.prepareStatement(sql);
 
             pstmt.setString(1, test_cardnumber);
             pstmt.setString(2, test_pin);
@@ -45,7 +52,6 @@ class ExistingUser{
             rs = pstmt.executeQuery();
 
             if(rs.next()){
-                System.out.println("User exists!");
                 existingUserMenu();
             }
             else{
@@ -53,41 +59,57 @@ class ExistingUser{
             }
         }catch(SQLException e){
 
-            System.out.println("Error");
+            System.out.println("Error"+e.getMessage());
         }
     }
 
 
     public void existingUserMenu() {
         try{
-        System.out.println("Welcome" + rs.getString("name"));
+        System.out.println("Welcome"+" "+ rs.getString("full_name"));
         }catch(SQLException e){
-            System.out.println("Error..."+e.getMessage());
+            System.out.println("Error..."+e.getErrorCode()+e.getMessage());
         }
-        System.out.println("+--------------------------------------------------------------------------------+");
-        System.out.println("|  1.Deposit\n|  2.Withdraw\n|  3.Check Balance\n|  4.Quick Withdraw|  5.Back to Main Menu");
-        System.out.println("+--------------------------------------------------------------------------------+");
+        System.out.println("+---------------------------------+");
+        System.out.println("|  1.Deposit                      |\n|  2.Withdraw                     |\n|  3.Check Balance                |\n|  4.Quick Withdraw               |\n|  5.Back to Main Menu            |");
+        System.out.println("+---------------------------------+");
         System.out.print("Enter Choice:");
-        userInput = scan.nextLine();    
-   
-    }
+        userInput = scan.nextLine();
+
+        switch (userInput) {
+            case "1":
+            depositAmt();
+        }
+            
 }
 
     
 
-//     public int depositAmt(Scanner scan) {
-//         System.out.print("Enter Amount to be deposited:");
-//         int deposit = scan.nextInt();
-
-//         if (deposit < 0) {
-//             System.out.println("Invalid Amount!");
-//         } else {
-//             Bal += deposit;
-//             System.out.println("Amount Successfully Deposited!");
-//         }
-//         scan.nextLine();
-//         return Bal;
-//     }
+    void depositAmt() {
+        System.out.print("Enter Amount to be deposited:$");
+        String amt = scan.nextLine();
+        mt = pt.matcher(amt);
+        if(mt.matches()){
+            try{
+            Bal = rs.getString("balance");
+            System.out.println(Bal);
+            int temp = Integer.parseInt(amt);
+            int temp2 = Integer.parseInt(Bal);
+            int temp3 = temp + temp2;
+            Bal = Integer.toString(temp3);
+            sql = "UPDATE customers SET balance = ?";
+            pstmt = con.prepareStatement(sql);
+            pstmt.setString(1, Bal);
+            }
+            catch(SQLException e){
+                System.out.println("Error ocurred..."+e.getMessage());
+            }
+        }
+        else{
+            System.out.println("Invalid Amount...");
+        }
+    }
+}
 
 //     public int withdrawAmt(Scanner scan) {
 //         System.out.print("Enter amount to be withdrawn:");

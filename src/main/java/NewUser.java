@@ -64,7 +64,7 @@ class NewUser{
             PreparedStatement pstmt = con.prepareStatement(sql);
 
             pstmt.setString(1,name);
-            pstmt.setInt(2, 0);
+            pstmt.setString(2, "0");
             pstmt.setString(3,cardNumber);
             pstmt.setString(4, pin); 
             
