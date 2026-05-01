@@ -8,8 +8,9 @@ class MainMenu{
     NewUser newuser = new NewUser(scan);
     ExistingUser existinguser = new ExistingUser(scan);
 
+
             public void mainMenu() {
-        do {
+            do{
             System.out.println("+----------------------------------+");
             System.out.println("|  1.New-user                      |\n|  2.Existing-user                 |\n|  3.Exit                          |");
             System.out.println("+----------------------------------+");
@@ -38,3 +39,4 @@ class MainMenu{
         } while (!userInput.equals("3"));
     }
 }
+

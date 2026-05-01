@@ -17,16 +17,15 @@ class ExistingUser {
 
     String sql;
     String userInput;
+
     Scanner scan;
-
-    MainMenu mainmenu = new MainMenu();
-    Pattern pt = Pattern.compile("[0-9]{0,5}");
     DatabaseManager db = new DatabaseManager();
-    Connection con = db.getConnection();
-
+    Connection con;
     PreparedStatement pstmt;
-    Matcher mt;
     ResultSet rs;
+
+    Pattern pt = Pattern.compile("[0-9]{0,5}");
+    Matcher mt;
 
 
     ExistingUser(Scanner scan) {
@@ -35,6 +34,9 @@ class ExistingUser {
 
     public void existingUser() throws InputMismatchException {
 
+        this.db.setConnection();
+        this.con = db.get_Connection();
+
         System.out.println("Enter account details");
         System.out.print("Enter your Card Number:");
         test_cardnumber = scan.nextLine();
@@ -42,8 +44,7 @@ class ExistingUser {
         System.out.print("Enter Pin No:");
         test_pin = scan.nextLine();
 
-        try {
-            // int rowFound;
+        try{
 
             sql = "SELECT id, full_name, balance FROM customers WHERE card_number = ? AND pin = ?";
 
@@ -78,7 +79,7 @@ class ExistingUser {
         do{
         System.out.println("+---------------------------------+");
         System.out.println(
-                "|  1.Deposit                      |\n|  2.Withdraw                     |\n|  3.Check Balance                |\n|  5.Back to Main Menu            |");
+                "|  1.Deposit                      |\n|  2.Withdraw                     |\n|  3.Check Balance                |\n|  4.Back to Main Menu            |");
         System.out.println("+---------------------------------+");
         System.out.print("Enter Choice:");
         userInput = scan.nextLine();
@@ -94,13 +95,20 @@ class ExistingUser {
                 balance();
                 break;
             case "4":
-                mainmenu.mainMenu();
+                try{
+                    con.close();
+                    pstmt.close();
+                    rs.close();
+                }
+                catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
                 break;
             default:
                 System.out.println("Invalid choice...");
         }
-    }while (!userInput.equals("4"));
-}
+    }while (!userInput.equals("4")); 
+    }
 
     void deposit() {
         System.out.print("Enter Amount to be deposited:$");
@@ -108,7 +116,7 @@ class ExistingUser {
         mt = pt.matcher(damt);
 
         if (mt.matches()) {
-            try {
+            try{
                 Bal = rs.getString("balance");
 
                 int temp = Integer.parseInt(damt);
@@ -162,8 +170,8 @@ class ExistingUser {
     }
     void balance(){
         try{
-            Bal = rs.getNString("balance");
-            System.out.println("$"+Bal);
+            Bal = rs.getString("balance");
+            System.out.println("$"+ Bal);
         }catch(SQLException e){
             System.out.println("Error.."+e.getMessage());
         }

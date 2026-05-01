@@ -9,10 +9,6 @@ public class DatabaseManager {
     private String password = "joydeep05102003";
     Connection con;
 
-    public DatabaseManager() {
-        setConnection();
-    }
-
     void setConnection(){
     try{
         con = DriverManager.getConnection(url,username,password);
@@ -20,7 +16,7 @@ public class DatabaseManager {
         System.out.println("Error connecting database..."+" "+e.getMessage());
     }
  } 
- Connection getConnection(){
+ Connection get_Connection(){
     return con;
- } 
-}
+    }
+ }

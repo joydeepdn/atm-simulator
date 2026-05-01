@@ -9,14 +9,17 @@ class NewUser{
     private String cardNumber;
     private String pin;
 
+
+    DatabaseManager db = new DatabaseManager();
+    PreparedStatement pstmt;
+    Connection con;
     Scanner scan;
 
     NewUser(Scanner scan){
         this.scan =  scan;
+        this.db.setConnection();
+        this.con = this.db.get_Connection();
     }
-
-    DatabaseManager db = new DatabaseManager();
-    Connection con = db.getConnection();
 
     public void newuserCreation(){
 
@@ -28,7 +31,7 @@ class NewUser{
 
         pin = pin();
 
-        custData();
+        sendData();
     }
     
     String pin(){
@@ -57,11 +60,11 @@ class NewUser{
         return card_number;
 
     }
-    void custData(){
+    void sendData(){
         try{
             String sql = "INSERT INTO customers (full_name, balance, card_number, pin) VALUES (?,?,?,?)";
 
-            PreparedStatement pstmt = con.prepareStatement(sql);
+            pstmt = con.prepareStatement(sql);
 
             pstmt.setString(1,name);
             pstmt.setString(2, "0");
@@ -69,10 +72,18 @@ class NewUser{
             pstmt.setString(4, pin); 
             
             int rowsInserted = pstmt.executeUpdate();
-            System.out.println(rowsInserted + "no. of rows affected successfully");
+            System.out.println(rowsInserted + "no. of rows affected");
 
         }catch(SQLException e){
-            System.out.println("error..." + e.getMessage());
+            System.out.println(e.getMessage());
+        }
+        finally{
+            try{
+                con.close();
+                pstmt.close();
+            }catch(SQLException e){
+                System.out.println(e.getMessage());
+            }
         }
     }
 }
