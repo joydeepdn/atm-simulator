@@ -1,12 +1,16 @@
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import io.github.cdimascio.dotenv.*;
 
 public class DatabaseManager {
 
-    private String url = "jdbc:mysql://localhost:3306/learning_jdbc";
-    private String username = "root";
-    private String password = "joydeep05102003";
+    Dotenv dotenv = Dotenv.load();
+    
+
+    private String url = dotenv.get("url");
+    private String username = dotenv.get("username");
+    private String password = dotenv.get("password");
     Connection con;
 
     void setConnection(){
