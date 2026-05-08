@@ -64,7 +64,7 @@ class ExistingUser {
             }
         } catch (SQLException e) {
 
-            System.out.println("Error"+" "+e.getMessage());
+            System.out.println(e.getMessage());
         }
     }
 
@@ -133,7 +133,7 @@ class ExistingUser {
 
                 System.out.println(rowsAffected + "Nos of row affected");
             } catch (SQLException e) {
-                System.out.println("Error ocurred..." + e.getMessage());
+                System.out.println(e.getMessage());
             }
         } else {
             System.out.println("Invalid Amount...");
@@ -164,7 +164,7 @@ class ExistingUser {
                     System.out.println(rowsAffected+" "+"No. of row affected");
                 }
             }catch(SQLException e){
-                System.out.println("Error"+" "+e.getMessage());
+                System.out.println(e.getMessage());
             }
         }
     }
@@ -173,7 +173,7 @@ class ExistingUser {
             Bal = rs.getString("balance");
             System.out.println("$"+ Bal);
         }catch(SQLException e){
-            System.out.println("Error.."+e.getMessage());
+            System.out.println(e.getMessage());
         }
     }
 }            
